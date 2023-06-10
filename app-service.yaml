@@ -3,11 +3,10 @@ kind: Service
 metadata:
   name: app-service
 spec:
-  selector:
-    app: app
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 3000
       targetPort: 3000
-  type: NodePort
-
+  selector:
+    app: app
