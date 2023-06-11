@@ -1,4 +1,3 @@
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -13,3 +12,32 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
+...
+spec:
+  serviceName: mongo-srv
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-01
+  template:
+    metadata:
+      labels:
+        app: mongo-01
+    spec:
+      containers: 
+        - name: mongo-01
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: volume-01 
+              mountPath: /data
+          resources:
+            limits:
+              cpu: 1
+              memory: 500Mi
+      volumes:
+        - name: volume-01
+          persistentVolumeClaim:
+            claimName: pv-claim-mongo-01
