@@ -1,11 +1,15 @@
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongo-storage
+  name: pvc-mongo-01
+  namespace: app-service
+  labels:
+    app: volume-01
 spec:
+  volumeName: pv-mongo-01
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-

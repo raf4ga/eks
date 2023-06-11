@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: PersistenVolume
+metadata:
+  name: pv-mongo-01
+  labels:
+    app: volume-01
+    type: local
+spec:
+  storageClassName: ""
+  claimRef:
+    name: pv-claim-mongo-01
+    namespace: app-service
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: "/tmp/pv-volume-01"
